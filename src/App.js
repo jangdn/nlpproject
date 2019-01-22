@@ -6,7 +6,7 @@ const style = {
   App : {
     display: 'flex',
     flexDirection: 'row',
-    height: '800px',
+    height: '1000px',
   }
 }
 

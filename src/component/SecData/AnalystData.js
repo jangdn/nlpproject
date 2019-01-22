@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 const style = {
   AnalystData : {
     
-    height: '30%',
+    height: '40%',
 
   }
 }
