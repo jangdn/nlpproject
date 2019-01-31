@@ -6,8 +6,8 @@ const style = {
   SecData : {
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: 'beige',
-    width : '40%',
+    //backgroundColor: 'beige',
+    width : '100%',
     height : '100%',
   }
 }

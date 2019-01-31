@@ -1,14 +1,15 @@
 import React, {Component} from 'react'
+import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 const style = {
   AnalystData : {
     
-    height: '40%',
+    height: '100%',
 
   },
   iframe : {
     width : '100%',
-    height : '90%',
+    height : '70%',
     background : '#ffffff'
   }
 }
@@ -17,35 +18,65 @@ class AnalystData extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   state = {
-    iframeSrc : 'context_c'
+      dropdownOpen: false,
+      iframeSrc : 'index',
+      selectGraph : 'select graph'
   };
 
   handleChange(e){
     e.preventDefault();
     this.setState({
       iframeSrc : e.target.value,
+      selectGraph : e.target.id,
     });
+    console.log(e.target.value);
+    console.log(e.target.id);
+
   };
 
+
+  toggle() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  }
+
+
   render() {
-  let { iframeSrc }= this.state;
+  let { iframeSrc, selectGraph }= this.state;
+  let $iframe = (<div></div>)
+  if (iframeSrc)
+  {
+    $iframe = (<iframe style = {style.iframe} src = {'http://127.0.0.1:5000/api/graph/' + iframeSrc} width = '100' height = '100' />);
+    console.log("call!");
+  }
   return (
       <div className="AnalystData" style = {style.AnalystData}>
-        <select onChange={this.handleChange}>
-          <option value="context_c">context_c</option>
-          <option value="context_q">context_q</option>
-          <option value="highway_c">highway_c</option>
-          <option value="char_c">char_c</option>
-          <option value="char_q">char_q</option>
-          <option value="word_c">word_c</option>
-          <option value="word_q">word_q</option>
-          <option value="loss">loss</option>
-        </select>
-        <iframe style = {style.iframe} src = {'http://localhost:3001/' + iframeSrc}/>
-        {/* <iframe style = {style.iframe} src="graph1.html"></iframe> */}
+        <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+          <DropdownToggle caret>
+            {selectGraph}
+          </DropdownToggle>
+          <DropdownMenu onClick = {this.handleChange}>
+            <DropdownItem header>graph</DropdownItem>
+            <DropdownItem value = "index" id = "context_c">context_c</DropdownItem>
+            <DropdownItem value = "index2" id = "context_q">context_q</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem value = "index3" id = "highway_c">highway_c</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem value = "index4" id = "char_c">char_c</DropdownItem>
+            <DropdownItem value = "index5" id = "char_q">char_q</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem value = "index6" id = "word_c">word_c</DropdownItem>
+            <DropdownItem value = "index7" id = "word_q">word_q</DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem value = "index8" id = "loss">loss</DropdownItem>
+          </DropdownMenu>
+      </ButtonDropdown>
+        {$iframe}
       </div>
     );
   }

@@ -5,9 +5,9 @@ import { Nav, NavItem, NavLink } from 'reactstrap';
 const style = {
   Header : {
     display: 'flex',
+    backgroundColor : 'rgb(245,245,245)',
     flexDirection : 'column',
-    backgroundColor : 'burlywood',
-    width : '60%',
+    width : '100%',
     height : '100%',
   }
 }
